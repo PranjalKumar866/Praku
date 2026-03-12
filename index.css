@@ -4,19 +4,23 @@
 
 @layer utilities {
   .glass-panel {
-    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl;
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_0_30px_rgba(255,0,0,0.1)];
   }
   
   .glass-panel-dark {
-    @apply backdrop-blur-xl bg-black/40 border border-white/5 shadow-xl;
+    @apply backdrop-blur-xl bg-black/60 border border-red-500/10 shadow-[0_0_40px_rgba(139,0,0,0.2)];
   }
   
   .glass-button {
-    @apply backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20 transition-all duration-300;
+    @apply backdrop-blur-md bg-red-500/10 border border-red-500/20 hover:bg-red-500/30 transition-all duration-300;
   }
 
-  .text-glow {
-    text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+  .text-glow-red {
+    text-shadow: 0 0 15px rgba(255, 49, 49, 0.6);
+  }
+
+  .red-gradient-bg {
+    background: radial-gradient(circle at 50% 50%, rgba(139, 0, 0, 0.15) 0%, transparent 70%);
   }
 }
 
@@ -33,21 +37,22 @@
 }
 
 .cursor-dot {
-  width: 8px;
-  height: 8px;
-  background-color: white;
+  width: 6px;
+  height: 6px;
+  background-color: #FF3131;
+  box-shadow: 0 0 10px #FF3131;
 }
 
 .cursor-outline {
-  width: 40px;
-  height: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(255, 49, 49, 0.3);
   transition: width 0.2s, height 0.2s, background-color 0.2s;
 }
 
 body.hovering .cursor-outline {
-  width: 60px;
-  height: 60px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: transparent;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 49, 49, 0.1);
+  border-color: #FF3131;
 }

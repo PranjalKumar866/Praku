@@ -5,20 +5,19 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, Sparkles, Droplets, Lock, Upload as UploadIcon } from 'lucide-react';
+import { Menu, X, Upload as UploadIcon, Youtube, Instagram, Twitter, ChevronRight } from 'lucide-react';
 import { BackgroundScene } from './components/Visuals';
-import { Hero, About, Contact } from './components/Sections';
+import { Hero, Services, Skills, Experience, Contact } from './components/Sections';
 import { ProjectSystem } from './components/ProjectSystem';
 import { ThemeMode } from './types';
 
 const App: React.FC = () => {
-  // Default to 'light' mode as requested
-  const [theme, setTheme] = useState<ThemeMode>('light');
+  // Force cinematic theme
+  const [theme] = useState<ThemeMode>('cinematic');
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
-  // Default isAdmin to true so all users can upload
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin] = useState(true);
 
   // Smooth Scroll & Header Logic
   useEffect(() => {
@@ -48,18 +47,17 @@ const App: React.FC = () => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Theme Helpers
-  const getThemeClasses = () => {
-    switch(theme) {
-      case 'light': return 'bg-slate-50 text-slate-900 selection:bg-slate-900 selection:text-white';
-      case 'glass': return 'bg-slate-900 text-white selection:bg-cyan-400 selection:text-black';
-      case 'glow': return 'bg-black text-white selection:bg-purple-500 selection:text-white';
-      default: return 'bg-[#0F172A] text-white selection:bg-cyan-500 selection:text-black';
-    }
-  };
+  const navItems = [
+    { name: 'Home', id: 'home' },
+    { name: 'Services', id: 'services' },
+    { name: 'Skills', id: 'skills' },
+    { name: 'Projects', id: 'projects' },
+    { name: 'Experience', id: 'experience' },
+    { name: 'Contact', id: 'contact' }
+  ];
 
   return (
-    <div className={`min-h-screen transition-colors duration-700 ease-in-out ${getThemeClasses()} overflow-x-hidden`}>
+    <div className="min-h-screen bg-black text-white selection:bg-red-600 selection:text-white overflow-x-hidden font-sans">
       
       {/* Custom Cursor */}
       <div className="cursor-dot hidden md:block" style={{ left: cursorPos.x, top: cursorPos.y }}></div>
@@ -68,50 +66,42 @@ const App: React.FC = () => {
       {/* Dynamic Background */}
       <BackgroundScene theme={theme} />
       
-      {/* Glow Theme Gradient Overlay */}
-      {theme === 'glow' && (
-        <div className="fixed inset-0 z-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,rgba(109,40,217,0.15),transparent_70%)] animate-pulse-slow"></div>
-      )}
-      
       {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? (theme === 'light' ? 'bg-white/80' : 'bg-slate-900/80') + ' backdrop-blur-md py-4 shadow-lg' : 'bg-transparent py-6'}`}>
-        <div className="container mx-auto px-6 flex justify-between items-center">
-          <div className="font-sans font-black text-2xl tracking-tighter cursor-pointer z-50" onClick={() => scrollToSection('home')}>
-            PRAKU<span className="text-cyan-400">.</span>
+      <nav className={`fixed top-8 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[90%] max-w-5xl ${scrolled ? 'top-4' : 'top-8'}`}>
+        <div className="glass-panel-dark rounded-[2rem] px-8 py-4 flex justify-between items-center border border-red-500/20 shadow-[0_0_30px_rgba(255,0,0,0.1)]">
+          <div className="font-black text-2xl tracking-tighter cursor-pointer flex items-center gap-2 group" onClick={() => scrollToSection('home')}>
+            <div className="w-10 h-10 flex items-center justify-center group-hover:rotate-12 transition-transform">
+                <img src="/input_file_0.png" alt="Logo" className="w-full h-full object-contain" />
+            </div>
+            <span className="group-hover:text-red-500 transition-colors uppercase">PRAKU</span>
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide">
-            {['Home', 'Projects', 'About', 'Contact'].map((item) => (
+          <div className="hidden md:flex items-center gap-8 font-bold text-[10px] tracking-[0.2em] uppercase">
+            {navItems.map((item) => (
                 <button 
-                    key={item} 
-                    onClick={() => scrollToSection(item.toLowerCase())}
-                    className="hover:text-cyan-400 transition-colors uppercase"
+                    key={item.id} 
+                    onClick={() => scrollToSection(item.id)}
+                    className="hover:text-red-500 transition-colors relative group"
                 >
-                    {item}
+                    {item.name}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all group-hover:w-full"></span>
                 </button>
             ))}
-            <button 
-                onClick={() => scrollToSection('projects')}
-                className={`flex items-center gap-2 px-4 py-2 rounded-full font-bold transition-all ${theme === 'light' ? 'bg-slate-900 text-white hover:bg-slate-700' : 'bg-white text-black hover:bg-cyan-100'}`}
+          </div>
+
+          <div className="hidden md:flex items-center gap-4">
+             <button 
+                onClick={() => scrollToSection('contact')}
+                className="px-6 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-black text-[10px] tracking-widest transition-all shadow-lg shadow-red-600/20 flex items-center gap-2 group"
             >
-                <UploadIcon size={16} />
-                <span>UPLOAD</span>
+                HIRE ME
+                <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
 
-          {/* Controls */}
-          <div className="hidden md:flex items-center gap-4">
-            {/* Theme Toggles */}
-            <div className={`flex items-center gap-1 p-1 rounded-full border ${theme === 'light' ? 'bg-slate-100 border-slate-200' : 'bg-white/5 border-white/10'}`}>
-                <button onClick={() => setTheme('light')} className={`p-2 rounded-full transition-all ${theme === 'light' ? 'bg-white shadow text-orange-400' : 'text-slate-500 hover:text-slate-400'}`}><Sun size={16}/></button>
-                <button onClick={() => setTheme('midnight')} className={`p-2 rounded-full transition-all ${theme === 'midnight' ? 'bg-slate-700 shadow text-cyan-400' : 'text-slate-500 hover:text-slate-400'}`}><Moon size={16}/></button>
-                <button onClick={() => setTheme('glow')} className={`p-2 rounded-full transition-all ${theme === 'glow' ? 'bg-purple-900 shadow text-purple-400' : 'text-slate-500 hover:text-slate-400'}`}><Sparkles size={16}/></button>
-            </div>
-          </div>
-
-          <button className="md:hidden z-50 p-2" onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? <X /> : <Menu />}
+          <button className="md:hidden p-2 text-red-500" onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </nav>
@@ -120,29 +110,28 @@ const App: React.FC = () => {
       <AnimatePresence>
         {menuOpen && (
             <motion.div 
-                initial={{ opacity: 0, x: '100%' }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: '100%' }}
-                transition={{ type: "spring", damping: 20 }}
-                className={`fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 text-2xl font-bold ${theme === 'light' ? 'bg-white' : 'bg-slate-900'}`}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 text-3xl font-black bg-black/95 backdrop-blur-xl"
             >
-                {['Home', 'Projects', 'About', 'Contact'].map((item) => (
-                    <button key={item} onClick={() => scrollToSection(item.toLowerCase())}>
-                        {item}
+                {navItems.map((item) => (
+                    <button key={item.id} onClick={() => scrollToSection(item.id)} className="hover:text-red-500 transition-colors">
+                        {item.name}
                     </button>
                 ))}
                 
                 <button 
-                    onClick={() => { scrollToSection('projects'); }}
-                    className="flex items-center gap-2 px-6 py-3 bg-cyan-500 text-white rounded-xl"
+                    onClick={() => scrollToSection('contact')}
+                    className="mt-8 px-10 py-4 bg-red-600 text-white rounded-2xl font-black tracking-widest"
                 >
-                    <UploadIcon size={24} />
-                    UPLOAD WORK
+                    HIRE ME
                 </button>
-                
-                <div className="flex gap-4 mt-8">
-                    <button onClick={() => {setTheme('light'); setMenuOpen(false)}} className="p-4 bg-slate-100 rounded-full text-orange-500"><Sun /></button>
-                    <button onClick={() => {setTheme('midnight'); setMenuOpen(false)}} className="p-4 bg-slate-800 rounded-full text-cyan-400"><Moon /></button>
+
+                <div className="flex gap-8 mt-12">
+                    <Youtube className="text-slate-500 hover:text-red-600 cursor-pointer transition-colors" />
+                    <Instagram className="text-slate-500 hover:text-red-600 cursor-pointer transition-colors" />
+                    <Twitter className="text-slate-500 hover:text-red-600 cursor-pointer transition-colors" />
                 </div>
             </motion.div>
         )}
@@ -150,19 +139,51 @@ const App: React.FC = () => {
 
       <main className="relative">
         <Hero theme={theme} />
+        <Services theme={theme} />
+        <Skills theme={theme} />
         <ProjectSystem theme={theme} isAdmin={isAdmin} />
-        <About theme={theme} />
+        <Experience theme={theme} />
         <Contact theme={theme} />
       </main>
 
-      <footer className={`py-12 border-t ${theme === 'light' ? 'bg-white border-slate-200' : 'bg-slate-950 border-white/5'}`}>
-        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="text-center md:text-left">
-                <h4 className="font-bold text-xl mb-2">PRAKU</h4>
-                <p className={`text-sm ${theme === 'light' ? 'text-slate-500' : 'text-slate-400'}`}>Crafting Visual Stories with Precision.</p>
+      <footer className="py-20 relative z-10 bg-black border-t border-red-900/20">
+        <div className="container mx-auto px-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div className="col-span-1 md:col-span-2">
+                    <div className="font-black text-3xl tracking-tighter mb-6 flex items-center gap-3">
+                        <img src="/input_file_0.png" alt="Logo" className="w-10 h-10 object-contain" />
+                        PRAKU<span className="text-red-600">.</span>
+                    </div>
+                    <p className="text-slate-400 max-w-md leading-relaxed">
+                        Professional video editor and content creator specializing in cinematic storytelling, high-energy edits, and premium visual content for brands and creators worldwide.
+                    </p>
+                </div>
+                <div>
+                    <h4 className="font-black text-[10px] tracking-[0.3em] uppercase text-red-500 mb-6">Quick Links</h4>
+                    <div className="flex flex-col gap-4 text-slate-400 font-bold text-sm">
+                        {navItems.map(item => (
+                            <button key={item.id} onClick={() => scrollToSection(item.id)} className="hover:text-white transition-colors text-left w-fit">{item.name}</button>
+                        ))}
+                    </div>
+                </div>
+                <div>
+                    <h4 className="font-black text-[10px] tracking-[0.3em] uppercase text-red-500 mb-6">Socials</h4>
+                    <div className="flex flex-col gap-4 text-slate-400 font-bold text-sm">
+                        <a href="#" className="hover:text-white transition-colors">YouTube</a>
+                        <a href="#" className="hover:text-white transition-colors">Instagram</a>
+                        <a href="#" className="hover:text-white transition-colors">Twitter</a>
+                        <a href="#" className="hover:text-white transition-colors">Behance</a>
+                    </div>
+                </div>
             </div>
-            <div className={`text-sm ${theme === 'light' ? 'text-slate-400' : 'text-slate-600'}`}>
-                © 2024 Pranjal Kumar. All rights reserved.
+            <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p className="text-slate-500 text-xs font-bold tracking-widest uppercase">
+                    © 2026 PRANJAL KUMAR. ALL RIGHTS RESERVED.
+                </p>
+                <div className="flex gap-8 text-slate-500 text-xs font-bold tracking-widest uppercase">
+                    <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+                </div>
             </div>
         </div>
       </footer>

@@ -3,18 +3,19 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 
-export type Category = 'Video' | 'Design' | 'Photo';
+export type Category = 'Video' | 'YouTube' | 'Reels' | 'Motion';
 
 export interface Project {
   id: string;
   title: string;
   category: Category;
-  image: string;
+  image: string; // Thumbnail
+  videoUrl?: string; // Video link
   description?: string;
-  link?: string;
+  link?: string; // External link
 }
 
-export type ThemeMode = 'midnight' | 'light' | 'glass' | 'glow';
+export type ThemeMode = 'cinematic';
 
 export interface ThemeConfig {
   bg: string;

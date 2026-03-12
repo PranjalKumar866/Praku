@@ -28,7 +28,7 @@ const FloatingLens = ({ position, scale, speed, rotationSpeed }: any) => {
             backside
             backsideThickness={5}
             thickness={2}
-            roughness={0}
+            roughness={0.1}
             transmission={1}
             ior={1.5}
             chromaticAberration={0.4}
@@ -36,7 +36,7 @@ const FloatingLens = ({ position, scale, speed, rotationSpeed }: any) => {
             distortion={0.5}
             distortionScale={0.5}
             temporalDistortion={0.1}
-            color="#a7f3d0"
+            color="#ff3131"
         />
         </mesh>
     </Float>
@@ -53,14 +53,14 @@ const AbstractShape = ({ position, color }: any) => {
                     roughness={0.1} 
                     metalness={0.8}
                     transparent
-                    opacity={0.6}
+                    opacity={0.4}
                 />
             </mesh>
         </Float>
     )
 }
 
-const InteractiveParticles = ({ count = 150, color }: { count?: number, color: string }) => {
+const InteractiveParticles = ({ count = 200, color }: { count?: number, color: string }) => {
   const mesh = useRef<THREE.InstancedMesh>(null);
   const { viewport, mouse } = useThree();
   const dummy = useMemo(() => new THREE.Object3D(), []);
@@ -108,35 +108,33 @@ const InteractiveParticles = ({ count = 150, color }: { count?: number, color: s
 
   return (
     <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
-      <dodecahedronGeometry args={[0.2, 0]} />
-      <meshPhongMaterial color={color} emissive={color} emissiveIntensity={0.5} transparent opacity={0.6} />
+      <dodecahedronGeometry args={[0.1, 0]} />
+      <meshPhongMaterial color={color} emissive={color} emissiveIntensity={1} transparent opacity={0.4} />
     </instancedMesh>
   );
 };
 
 export const BackgroundScene: React.FC<{ theme: ThemeMode }> = ({ theme }) => {
-  const isLight = theme === 'light';
-
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none transition-opacity duration-1000">
+    <div className="fixed inset-0 z-0 pointer-events-none transition-opacity duration-1000 bg-black">
       <Canvas camera={{ position: [0, 0, 15], fov: 45 }} gl={{ alpha: true, antialias: true }}>
-        <ambientLight intensity={isLight ? 0.8 : 0.4} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
-        <pointLight position={[-10, -10, -10]} intensity={1} color={isLight ? "#3B82F6" : "#22D3EE"} />
+        <ambientLight intensity={0.2} />
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} color="#ff0000" />
+        <pointLight position={[-10, -10, -10]} intensity={1.5} color="#8b0000" />
         
         {/* Particle System */}
-        <InteractiveParticles color={isLight ? "#3B82F6" : "#22D3EE"} />
+        <InteractiveParticles color="#ff3131" />
 
         {/* Floating Glass Elements representing Lenses/Screens */}
-        <FloatingLens position={[-3, 2, 0]} scale={1.2} speed={0.5} rotationSpeed={0.2} />
-        <FloatingLens position={[4, -2, -2]} scale={1.5} speed={0.3} rotationSpeed={0.15} />
+        <FloatingLens position={[-5, 3, 0]} scale={1.2} speed={0.5} rotationSpeed={0.2} />
+        <FloatingLens position={[6, -3, -2]} scale={1.5} speed={0.3} rotationSpeed={0.15} />
         
-        <AbstractShape position={[0, 0, -5]} color={isLight ? "#D4AF37" : "#6D28D9"} />
+        <AbstractShape position={[0, 0, -8]} color="#8b0000" />
 
-        <Environment preset={isLight ? "studio" : "city"} />
-        
-        {!isLight && <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade speed={1} />}
+        <Environment preset="night" />
+        <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={1} />
       </Canvas>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,0,0,0.1),transparent_70%)]" />
     </div>
   );
 };

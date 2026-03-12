@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Mail, Send, Check } from 'lucide-react';
+import { ArrowDown, Mail, Send, Check, Youtube, Instagram, Twitter, Phone, MapPin, ExternalLink, Play, Award, Briefcase, User } from 'lucide-react';
 import { ThemeMode } from '../types';
 
 interface SectionProps {
@@ -15,119 +15,178 @@ interface SectionProps {
 export const Hero: React.FC<SectionProps> = ({ theme }) => {
   return (
     <section id="home" className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden pt-20">
-      <div className="container mx-auto px-6 relative z-10 text-center">
+      <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center gap-12">
         
+        {/* Left: 3D Profile Image */}
         <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-4 inline-block"
-        >
-            <span className={`px-4 py-1.5 rounded-full text-xs font-bold tracking-[0.3em] uppercase border ${theme === 'light' ? 'border-slate-300 text-slate-600 bg-white/50' : 'border-cyan-500/30 text-cyan-400 bg-cyan-900/10'} backdrop-blur-sm`}>
-                Portfolio 2024
-            </span>
-        </motion.div>
-
-        <motion.h1 
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2, type: "spring" }}
-            className={`font-sans font-extrabold text-7xl md:text-9xl mb-6 tracking-tighter ${theme === 'light' ? 'text-slate-900' : 'text-white'} drop-shadow-2xl`}
+            transition={{ duration: 1, type: "spring" }}
+            className="relative w-64 h-64 md:w-96 md:h-96"
         >
-          PRAKU
-        </motion.h1>
-
-        <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className={`font-serif italic text-2xl md:text-3xl mb-12 ${theme === 'light' ? 'text-slate-600' : 'text-slate-300'}`}
-        >
-          Visual Excellence Redefined
-        </motion.p>
-        
-        <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="flex flex-col md:flex-row gap-6 justify-center items-center"
-        >
-            <a href="#projects" className={`group relative px-8 py-4 rounded-full font-bold tracking-wide overflow-hidden transition-all duration-300 ${theme === 'light' ? 'bg-slate-900 text-white hover:bg-slate-800' : 'bg-white text-slate-900 hover:bg-cyan-50'}`}>
-                <span className="relative z-10">VIEW WORK</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
-            </a>
-            
-            <a href="#contact" className={`px-8 py-4 rounded-full font-bold tracking-wide border transition-all duration-300 ${theme === 'light' ? 'border-slate-300 text-slate-700 hover:border-slate-900' : 'border-white/20 text-white hover:bg-white/10 hover:border-white'}`}>
-                CONTACT ME
-            </a>
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-red-600 to-transparent animate-pulse-slow opacity-50 blur-2xl"></div>
+            <div className="relative w-full h-full rounded-full border-4 border-red-500/30 overflow-hidden shadow-[0_0_50px_rgba(255,0,0,0.3)]">
+                <img 
+                    src="/input_file_1.png" 
+                    alt="Pranjal Kumar" 
+                    className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
+                />
+            </div>
+            {/* Floating elements */}
+            <motion.div 
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="absolute -top-4 -right-4 p-3 glass-panel rounded-xl text-red-500"
+            >
+                <Play size={24} fill="currentColor" />
+            </motion.div>
         </motion.div>
+
+        {/* Right: Content */}
+        <div className="flex-1 text-center md:text-left">
+            <motion.div 
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                className="mb-4 inline-block"
+            >
+                <span className="px-4 py-1.5 rounded-full text-xs font-bold tracking-[0.3em] uppercase border border-red-500/30 text-red-400 bg-red-900/10 backdrop-blur-sm">
+                    Cinematic Video Editor
+                </span>
+            </motion.div>
+
+            <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.2 }}
+                className="font-sans font-black text-5xl md:text-7xl mb-6 tracking-tight text-white leading-tight"
+            >
+              Hi, It’s <span className="text-red-500 text-glow-red">Praku</span> – <br />
+              Video Editor & <br />
+              <span className="italic text-white">Content Creator.</span>
+            </motion.h1>
+
+            <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.5 }}
+                className="text-lg md:text-xl mb-10 text-slate-300 max-w-xl leading-relaxed"
+            >
+              My real name is <span className="text-white font-bold">Pranjal Kumar</span>. I create cinematic edits, YouTube videos, reels, and engaging visual content for creators and brands.
+            </motion.p>
+            
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+                className="flex flex-wrap gap-6 justify-center md:justify-start items-center"
+            >
+                <a href="#contact" className="group relative px-10 py-4 rounded-full font-bold tracking-wide overflow-hidden transition-all duration-300 bg-red-600 text-white hover:bg-red-700 shadow-[0_0_20px_rgba(255,0,0,0.4)]">
+                    <span className="relative z-10">HIRE ME</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+                </a>
+                
+                <div className="flex gap-4">
+                    {[
+                        { icon: <Youtube size={20} />, link: "#" },
+                        { icon: <Instagram size={20} />, link: "#" },
+                        { icon: <Twitter size={20} />, link: "#" }
+                    ].map((social, i) => (
+                        <motion.a 
+                            key={i}
+                            href={social.link}
+                            whileHover={{ scale: 1.1, y: -2 }}
+                            className="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-slate-300 hover:text-red-500 transition-colors"
+                        >
+                            {social.icon}
+                        </motion.a>
+                    ))}
+                </div>
+            </motion.div>
+        </div>
       </div>
 
       <motion.div 
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-50"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-30"
       >
-        <ArrowDown size={24} className={theme === 'light' ? 'text-slate-900' : 'text-white'} />
+        <ArrowDown size={24} className="text-white" />
       </motion.div>
     </section>
   );
 };
 
-export const About: React.FC<SectionProps> = ({ theme }) => {
-    const skills = [
-        { name: "Video Editing", level: 95 },
-        { name: "Motion Graphics", level: 85 },
-        { name: "Graphic Design", level: 90 },
-        { name: "Photography", level: 88 },
-        { name: "Color Grading", level: 80 }
+export const Services: React.FC<SectionProps> = () => {
+    const services = [
+        { title: "Video Editing", desc: "Professional cinematic storytelling with high-end transitions and pacing.", icon: <Play /> },
+        { title: "YouTube Editing", desc: "Retention-focused editing to grow your channel and engage viewers.", icon: <Youtube /> },
+        { title: "Shorts/Reels", desc: "Fast-paced, viral-ready vertical content for social media platforms.", icon: <Instagram /> },
+        { title: "Color Grading", desc: "Cinematic color correction and grading to set the perfect mood.", icon: <Award /> },
+        { title: "Motion Graphics", desc: "Dynamic text animations and visual effects to enhance your videos.", icon: <Briefcase /> }
     ];
 
-    const isLight = theme === 'light';
+    return (
+        <section id="services" className="py-32 relative z-10">
+            <div className="container mx-auto px-6">
+                <div className="text-center mb-20">
+                    <h2 className="text-4xl md:text-6xl font-black text-white mb-4 text-glow-red">Services</h2>
+                    <div className="h-1.5 w-24 bg-red-600 mx-auto rounded-full"></div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {services.map((service, i) => (
+                        <motion.div 
+                            key={i}
+                            whileHover={{ y: -10 }}
+                            className="glass-panel-dark p-8 rounded-3xl border border-red-500/10 hover:border-red-500/30 transition-all group"
+                        >
+                            <div className="w-14 h-14 rounded-2xl bg-red-600/20 flex items-center justify-center text-red-500 mb-6 group-hover:bg-red-600 group-hover:text-white transition-all">
+                                {service.icon}
+                            </div>
+                            <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
+                            <p className="text-slate-400 leading-relaxed">{service.desc}</p>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export const Skills: React.FC<SectionProps> = () => {
+    const skills = [
+        { name: "Premiere Pro", level: 98 },
+        { name: "After Effects", level: 90 },
+        { name: "CapCut", level: 95 },
+        { name: "DaVinci Resolve", level: 85 },
+        { name: "Storytelling", level: 92 },
+        { name: "Sound Design", level: 88 }
+    ];
 
     return (
-        <section id="about" className="py-32 relative z-10">
+        <section id="skills" className="py-32 relative z-10">
             <div className="container mx-auto px-6">
-                <div className={`grid grid-cols-1 md:grid-cols-2 gap-16 items-center ${isLight ? 'bg-white/60 border-slate-200' : 'bg-slate-900/40 border-white/10'} backdrop-blur-xl p-8 md:p-12 rounded-3xl border shadow-2xl`}>
-                    
-                    <div className="space-y-6">
-                        <div className="inline-block">
-                             <h2 className={`text-4xl md:text-5xl font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>About Me</h2>
-                             <div className={`h-1.5 w-24 rounded-full ${isLight ? 'bg-slate-900' : 'bg-cyan-400'}`}></div>
-                        </div>
-                        
-                        <p className={`text-lg leading-relaxed ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>
-                            I am <strong className={isLight ? 'text-slate-900' : 'text-cyan-400'}>Pranjal Kumar (PRAKU)</strong>, a multidisciplinary creative professional obsessed with detail. 
-                        </p>
-                        <p className={`text-lg leading-relaxed ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>
-                            My work bridges the gap between raw footage and cinematic storytelling. Whether capturing moments through a lens or crafting visuals in post-production, I aim for perfection and emotional resonance.
-                        </p>
-
-                        <div className="grid grid-cols-2 gap-4 pt-4">
-                            <div className={`p-4 rounded-xl ${isLight ? 'bg-slate-100' : 'bg-white/5'}`}>
-                                <h3 className={`font-bold text-xl mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>4+</h3>
-                                <p className="text-sm opacity-60">Years Experience</p>
-                            </div>
-                            <div className={`p-4 rounded-xl ${isLight ? 'bg-slate-100' : 'bg-white/5'}`}>
-                                <h3 className={`font-bold text-xl mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>100+</h3>
-                                <p className="text-sm opacity-60">Projects Done</p>
-                            </div>
-                        </div>
+                <div className="glass-panel-dark p-12 rounded-[3rem] border border-red-500/10">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl md:text-5xl font-black text-white mb-4 text-glow-red">Technical Arsenal</h2>
+                        <p className="text-slate-400">Tools I use to bring visions to life.</p>
                     </div>
 
-                    <div className="space-y-8">
-                        {skills.map((skill, index) => (
-                            <div key={index}>
-                                <div className="flex justify-between mb-2">
-                                    <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>{skill.name}</span>
-                                    <span className={`font-mono text-sm ${isLight ? 'text-slate-500' : 'text-cyan-400'}`}>{skill.level}%</span>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        {skills.map((skill, i) => (
+                            <div key={i}>
+                                <div className="flex justify-between mb-3">
+                                    <span className="font-bold text-white tracking-wide uppercase text-sm">{skill.name}</span>
+                                    <span className="text-red-500 font-mono text-sm">{skill.level}%</span>
                                 </div>
-                                <div className={`h-2 w-full rounded-full overflow-hidden ${isLight ? 'bg-slate-200' : 'bg-slate-700'}`}>
+                                <div className="h-3 w-full bg-white/5 rounded-full overflow-hidden border border-white/5">
                                     <motion.div 
                                         initial={{ width: 0 }}
                                         whileInView={{ width: `${skill.level}%` }}
                                         transition={{ duration: 1.5, ease: "easeOut" }}
-                                        className={`h-full rounded-full ${isLight ? 'bg-slate-900' : 'bg-gradient-to-r from-purple-600 to-cyan-400'}`}
+                                        className="h-full bg-gradient-to-r from-red-800 to-red-500 rounded-full shadow-[0_0_15px_rgba(255,0,0,0.3)]"
                                     />
                                 </div>
                             </div>
@@ -139,8 +198,44 @@ export const About: React.FC<SectionProps> = ({ theme }) => {
     );
 };
 
-export const Contact: React.FC<SectionProps> = ({ theme }) => {
-    const isLight = theme === 'light';
+export const Experience: React.FC<SectionProps> = () => {
+    const items = [
+        { year: "2023 - Present", title: "Lead Video Editor", company: "Freelance Creative", desc: "Crafting high-end cinematic content for international brands and top-tier YouTube creators." },
+        { year: "2021 - 2023", title: "Content Specialist", company: "Media Agency", desc: "Managed end-to-end video production for social media campaigns, focusing on engagement and brand storytelling." },
+        { year: "2019 - 2021", title: "Junior Editor", company: "Production House", desc: "Assisted in post-production for short films and commercial projects, mastering the fundamentals of editing." }
+    ];
+
+    return (
+        <section id="experience" className="py-32 relative z-10">
+            <div className="container mx-auto px-6">
+                <div className="text-center mb-20">
+                    <h2 className="text-4xl md:text-6xl font-black text-white mb-4 text-glow-red">My Journey</h2>
+                    <div className="h-1.5 w-24 bg-red-600 mx-auto rounded-full"></div>
+                </div>
+
+                <div className="max-w-4xl mx-auto space-y-12">
+                    {items.map((item, i) => (
+                        <motion.div 
+                            key={i}
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.2 }}
+                            className="relative pl-12 border-l-2 border-red-500/30 pb-12 last:pb-0"
+                        >
+                            <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-red-600 shadow-[0_0_10px_rgba(255,0,0,0.8)]"></div>
+                            <span className="text-red-500 font-mono text-sm mb-2 block tracking-widest">{item.year}</span>
+                            <h3 className="text-2xl font-bold text-white mb-1">{item.title}</h3>
+                            <h4 className="text-red-400/80 font-medium mb-4">{item.company}</h4>
+                            <p className="text-slate-400 leading-relaxed">{item.desc}</p>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export const Contact: React.FC<SectionProps> = () => {
     const [sent, setSent] = React.useState(false);
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -151,48 +246,70 @@ export const Contact: React.FC<SectionProps> = ({ theme }) => {
 
     return (
         <section id="contact" className="py-32 relative z-10">
-             <div className="container mx-auto px-6 max-w-4xl">
-                <div className={`text-center mb-16 space-y-4`}>
-                    <h2 className={`text-4xl md:text-6xl font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>Let's Create Together</h2>
-                    <p className={`text-xl ${isLight ? 'text-slate-600' : 'text-slate-400'}`}>Have a project in mind? Drop me a line.</p>
-                </div>
+             <div className="container mx-auto px-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    
+                    <div className="space-y-8">
+                        <div>
+                            <h2 className="text-4xl md:text-6xl font-black text-white mb-6 text-glow-red">Get In Touch</h2>
+                            <p className="text-xl text-slate-400 leading-relaxed">Ready to elevate your content? Let's discuss your next project.</p>
+                        </div>
 
-                <div className={`rounded-3xl p-8 md:p-12 shadow-2xl border ${isLight ? 'bg-white border-slate-200' : 'bg-slate-900/60 backdrop-blur-xl border-white/10'}`}>
-                    {sent ? (
-                        <motion.div 
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            className="flex flex-col items-center justify-center py-20 text-center"
-                        >
-                            <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center text-white mb-6">
-                                <Check size={40} />
-                            </div>
-                            <h3 className={`text-2xl font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>Message Sent!</h3>
-                            <p className="opacity-60">I'll get back to you within 24 hours.</p>
-                        </motion.div>
-                    ) : (
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="space-y-2">
-                                    <label className={`text-sm font-bold uppercase tracking-wider ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>Name</label>
-                                    <input type="text" required className={`w-full p-4 rounded-xl outline-none focus:ring-2 transition-all ${isLight ? 'bg-slate-50 border border-slate-200 focus:ring-slate-900 text-slate-900' : 'bg-white/5 border border-white/10 focus:ring-cyan-400 text-white'}`} placeholder="John Doe" />
+                        <div className="space-y-6">
+                            {[
+                                { icon: <Mail />, label: "Email", value: "pk4470588@gmail.com", link: "mailto:pk4470588@gmail.com" },
+                                { icon: <Phone />, label: "Phone", value: "+91 8299657243 / +91 7618053021", link: "tel:+918299657243" },
+                                { icon: <MapPin />, label: "Address", value: "India, U.P., Ghazipur", link: "#" }
+                            ].map((item, i) => (
+                                <a key={i} href={item.link} className="flex items-center gap-6 group">
+                                    <div className="w-14 h-14 rounded-2xl glass-panel flex items-center justify-center text-red-500 group-hover:bg-red-600 group-hover:text-white transition-all">
+                                        {item.icon}
+                                    </div>
+                                    <div>
+                                        <p className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1">{item.label}</p>
+                                        <p className="text-lg text-white font-medium group-hover:text-red-400 transition-colors">{item.value}</p>
+                                    </div>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="glass-panel-dark p-8 md:p-12 rounded-[3rem] border border-red-500/10">
+                        {sent ? (
+                            <motion.div 
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="flex flex-col items-center justify-center py-20 text-center"
+                            >
+                                <div className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center text-white mb-6 shadow-[0_0_20px_rgba(255,0,0,0.5)]">
+                                    <Check size={40} />
+                                </div>
+                                <h3 className="text-2xl font-bold text-white mb-2">Message Received!</h3>
+                                <p className="text-slate-400">I'll get back to you shortly.</p>
+                            </motion.div>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="space-y-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="space-y-2">
+                                        <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Name</label>
+                                        <input type="text" required className="w-full p-4 rounded-2xl bg-white/5 border border-white/10 focus:ring-2 focus:ring-red-500 outline-none text-white transition-all" placeholder="Your Name" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Email</label>
+                                        <input type="email" required className="w-full p-4 rounded-2xl bg-white/5 border border-white/10 focus:ring-2 focus:ring-red-500 outline-none text-white transition-all" placeholder="your@email.com" />
+                                    </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <label className={`text-sm font-bold uppercase tracking-wider ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>Email</label>
-                                    <input type="email" required className={`w-full p-4 rounded-xl outline-none focus:ring-2 transition-all ${isLight ? 'bg-slate-50 border border-slate-200 focus:ring-slate-900 text-slate-900' : 'bg-white/5 border border-white/10 focus:ring-cyan-400 text-white'}`} placeholder="john@example.com" />
+                                    <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Message</label>
+                                    <textarea rows={5} required className="w-full p-4 rounded-2xl bg-white/5 border border-white/10 focus:ring-2 focus:ring-red-500 outline-none text-white transition-all" placeholder="Tell me about your vision..."></textarea>
                                 </div>
-                            </div>
-                            <div className="space-y-2">
-                                <label className={`text-sm font-bold uppercase tracking-wider ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>Message</label>
-                                <textarea rows={5} required className={`w-full p-4 rounded-xl outline-none focus:ring-2 transition-all ${isLight ? 'bg-slate-50 border border-slate-200 focus:ring-slate-900 text-slate-900' : 'bg-white/5 border border-white/10 focus:ring-cyan-400 text-white'}`} placeholder="Tell me about your project..."></textarea>
-                            </div>
-                            <button type="submit" className={`w-full py-5 rounded-xl font-bold text-lg tracking-wide flex items-center justify-center gap-3 transition-all transform hover:scale-[1.02] active:scale-[0.98] ${isLight ? 'bg-slate-900 text-white hover:bg-slate-800' : 'bg-gradient-to-r from-purple-600 to-cyan-500 text-white shadow-lg shadow-cyan-500/20'}`}>
-                                <Send size={20} />
-                                SEND MESSAGE
-                            </button>
-                            <p className="text-center text-sm opacity-50 mt-4">Or email directly at <a href="mailto:pk4470588@gmail.com" className="underline hover:text-cyan-400">pk4470588@gmail.com</a></p>
-                        </form>
-                    )}
+                                <button type="submit" className="w-full py-5 rounded-2xl font-bold text-lg tracking-widest bg-red-600 text-white shadow-[0_0_20px_rgba(255,0,0,0.3)] hover:bg-red-700 transition-all flex items-center justify-center gap-3">
+                                    <Send size={20} />
+                                    SEND MESSAGE
+                                </button>
+                            </form>
+                        )}
+                    </div>
                 </div>
              </div>
         </section>

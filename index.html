@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PRAKU | Visual Excellence</title>
+    <title>Praku | Cinematic Video Excellence</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,26 +18,26 @@
               sans: ['"Outfit"', 'sans-serif'],
             },
             colors: {
-              midnight: '#0F172A',
-              purple: {
-                royal: '#6D28D9',
-                deep: '#581c87'
-              },
-              cyan: {
-                neon: '#22D3EE'
-              },
-              gold: {
-                soft: '#D4AF37'
+              midnight: '#050505',
+              accent: {
+                red: '#FF0000',
+                deep: '#8B0000',
+                glow: '#FF3131'
               }
             },
             animation: {
               'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
               'float': 'float 6s ease-in-out infinite',
+              'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
             },
             keyframes: {
               float: {
                 '0%, 100%': { transform: 'translateY(0)' },
                 '50%': { transform: 'translateY(-20px)' },
+              },
+              'glow-pulse': {
+                '0%, 100%': { opacity: 0.8, transform: 'scale(1)' },
+                '50%': { opacity: 1, transform: 'scale(1.05)' },
               }
             }
           }
@@ -82,8 +82,10 @@
   }
 }
 </script>
+<link rel="stylesheet" href="/index.css">
 </head>
   <body>
     <div id="root"></div>
-  </body>
+  <script type="module" src="/index.tsx"></script>
+</body>
 </html>
